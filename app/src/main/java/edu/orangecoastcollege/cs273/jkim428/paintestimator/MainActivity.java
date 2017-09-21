@@ -35,8 +35,10 @@ public class MainActivity extends AppCompatActivity {
         mDoorsEditText = (EditText) findViewById(R.id.doorsEditText);
         mWindowsEditText = (EditText) findViewById(R.id.windowsEditText);
 
+        //mComputeButton = (Button) findViewById(R.id.computeButton);
+        //mHelpButton = (Button) findViewById(R.id.helpButton);
+
         mGallonsTextView = (TextView) findViewById(R.id.gallonsTextView);
-        // TODO: Finish initialization
     }
 
     private void loadSharedPreferences()
@@ -52,7 +54,14 @@ public class MainActivity extends AppCompatActivity {
             mHeightEditText.setText(String.valueOf(mRoom.getHeight()));
 
             // TODO: Keep going
+            mRoom.setWindows(mPrefs.getInt("windows", 0));
+            mWindowsEditText.setText(String.valueOf(mRoom.getWindows()));
 
+            mRoom.setWidth(mPrefs.getFloat("width", 0.0f));
+            mWidthEditText.setText(String.valueOf(mRoom.getWidth()));
+
+            mRoom.setLength(mPrefs.getFloat("length", 0.0f));
+            mLengthEditText.setText(String.valueOf(mRoom.getLength()));
         }
     }
 
@@ -63,7 +72,10 @@ public class MainActivity extends AppCompatActivity {
         editor.putFloat("length", mRoom.getLength());
         editor.putFloat("width", mRoom.getWidth());
         editor.putFloat("height", mRoom.getHeight());
+
         // TODO: Keep going...
+        editor.putInt("doors", mRoom.getDoors());
+        editor.putInt("windows", mRoom.getWindows());
         // Save the changes to the SharedPreferences file
         editor.commit();
     }
